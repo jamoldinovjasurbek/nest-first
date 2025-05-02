@@ -1,26 +1,41 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ProductsService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  constructor(private prisma: PrismaService) {}
+
+  async getProducts() {
+    return this.prisma.products.findMany();
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async getOneProduct(id: number) {
+    return this.prisma.products.findUnique({ where: { id } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async createProduct(data: {
+    name: string;
+    price: number;
+    made_date: number;
+    category_id: number;
+  }) {
+    return this.prisma.products.create({ data });
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async updateProduct(
+    data: {
+      name: string;
+      price: number;
+      made_date: number;
+      category_id: number;
+    },
+    id: number,
+  ) {
+    return this.prisma.products.update({ where: { id }, data });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async deleteProduct(id: number) {
+    await this.prisma.products.delete({ where: { id } });
+    return { success: true, message: "Muvaffaqiyatli o'chirildi" };
   }
 }
