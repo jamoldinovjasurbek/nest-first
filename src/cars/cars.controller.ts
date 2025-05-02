@@ -1,41 +1,47 @@
-// import {
-//   Body,
-//   Controller,
-//   Delete,
-//   Get,
-//   Param,
-//   Post,
-//   Put,
-// } from '@nestjs/common';
-// import { PaymentsService } from './payments.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { CarsService } from './cars.service';
 
-// @Controller('/posts')
-// export class PaymentsController {
-//   constructor(private readonly paymentsService: PaymentsService) {}
+@Controller('/posts')
+export class CarsController {
+  constructor(private readonly carsService: CarsService) {}
 
-//   @Get()
-//   async getPaymentsCotroller() {
-//     return await this.paymentsService.getPayments();
-//   }
-//   @Get(':id')
-//   async getOnePaymentController(@Param('id') id: string) {
-//     return await this.paymentsService.getOnePayment(+id);
-//   }
-//   @Post()
-//   async createPaymentController(
-//     @Body() body: { card_number: number; quantity: number },
-//   ) {
-//     return this.paymentsService.createPayment(body);
-//   }
-//   @Put(':id')
-//   async updatePayment(
-//     @Body() body: { card_number: number; quantity: number },
-//     @Param('id') id: string,
-//   ) {
-//     return this.paymentsService.updatePayment(body, +id);
-//   }
-//   @Delete(':id')
-//   async deletePayment(@Param('id') id: string) {
-//     return this.paymentsService.deletePayment(+id);
-//   }
-// }
+  @Get()
+  async getCarsCotroller() {
+    return await this.carsService.getCars();
+  }
+  @Get(':id')
+  async getOneCarController(@Param('id') id: string) {
+    return await this.carsService.getOneCar(+id);
+  }
+  @Post()
+  async createCarController(
+    @Body() body: { model: string; brand: string; year: number; price: number },
+  ) {
+    return this.carsService.createCar(body);
+  }
+  @Put(':id')
+  async updateCarController(
+    @Body()
+    body: {
+      model: string;
+      brand: string;
+      year: number;
+      price: number;
+    },
+    @Param('id') id: string,
+  ) {
+    return this.carsService.updateCar(body, +id);
+  }
+  @Delete(':id')
+  async deleteCarController(@Param('id') id: string) {
+    return this.carsService.deleteCar(+id);
+  }
+}

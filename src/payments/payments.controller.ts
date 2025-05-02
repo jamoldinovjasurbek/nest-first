@@ -28,14 +28,14 @@ export class PaymentsController {
     return this.paymentsService.createPayment(body);
   }
   @Put(':id')
-  async updatePayment(
+  async updatePaymentController(
     @Body() body: { card_number: number; quantity: number },
     @Param('id') id: string,
   ) {
     return this.paymentsService.updatePayment(body, +id);
   }
   @Delete(':id')
-  async deletePayment(@Param('id') id: string) {
+  async deletePaymentController(@Param('id') id: string) {
     return this.paymentsService.deletePayment(+id);
   }
 }

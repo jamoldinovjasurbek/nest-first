@@ -1,31 +1,41 @@
-// import { Injectable } from '@nestjs/common';
-// import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 
-// @Injectable()
-// export class PaymentsService {
-//   constructor(private prisma: PrismaService) {}
+@Injectable()
+export class CarsService {
+  constructor(private prisma: PrismaService) {}
 
-//   async getPayments() {
-//     return this.prisma.payments.findMany();
-//   }
+  async getCars() {
+    return this.prisma.cars.findMany();
+  }
 
-//   async getOnePayment(id: number) {
-//     return this.prisma.payments.findUnique({ where: { id } });
-//   }
+  async getOneCar(id: number) {
+    return this.prisma.cars.findUnique({ where: { id } });
+  }
 
-//   async createPayment(data: { card_number: number; quantity: number }) {
-//     return this.prisma.payments.create({ data });
-//   }
+  async createCar(data: {
+    model: string;
+    brand: string;
+    year: number;
+    price: number;
+  }) {
+    return this.prisma.cars.create({ data });
+  }
 
-//   async updatePayment(
-//     data: { card_number: number; quantity: number },
-//     id: number,
-//   ) {
-//     return this.prisma.payments.update({ where: { id }, data });
-//   }
+  async updateCar(
+    data: {
+      model: string;
+      brand: string;
+      year: number;
+      price: number;
+    },
+    id: number,
+  ) {
+    return this.prisma.cars.update({ where: { id }, data });
+  }
 
-//   async deletePayment(id: number) {
-//     await this.prisma.payments.delete({ where: { id } });
-//     return { success: true, message: "Muvaffaqiyatli o'chirildi" };
-//   }
-// }
+  async deleteCar(id: number) {
+    await this.prisma.cars.delete({ where: { id } });
+    return { success: true, message: "Muvaffaqiyatli o'chirildi" };
+  }
+}
