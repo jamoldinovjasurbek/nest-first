@@ -10,5 +10,5 @@ async function bootstrap() {
   }
 }
 bootstrap().catch((error) => {
-  console.error('Something is wrong: ', error);
+  console.error('Something was  wrong: ', error);
 });
