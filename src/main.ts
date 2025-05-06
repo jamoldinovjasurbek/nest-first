@@ -6,9 +6,9 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     await app.listen(process.env.PORT ?? 3000);
   } catch (error) {
-    console.error('Boshlanishda xatolik boldi', error);
+    console.error('Error in starting', error);
   }
 }
 bootstrap().catch((error) => {
-  console.error('Xatolik yuz berdi: ', error);
+  console.error('Something is wrong: ', error);
 });
